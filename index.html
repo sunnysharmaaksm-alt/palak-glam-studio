@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffe5ed">
+<meta name="description" content="PALAK GLAM STUDIO — Makeup Artist in Lucknow. Bridal, party, engagement, HD and custom makeup. Studio and home service.">
+<title>PALAK GLAM STUDIO — Makeup Artist, Lucknow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#d52b83;--deep:#9f205f;--soft:#ffe7ef;--pale:#fff8fa;--ink:#54223d;--muted:#805d70;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--pale);color:var(--ink);font-family:'DM Sans',sans-serif}a{color:inherit;text-decoration:none}
+.top{background:#fff;text-align:center;padding:8px 12px;color:#a34c79;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+header{height:70px;background:rgba(255,255,255,.94);position:sticky;top:0;z-index:10;box-shadow:0 2px 18px #a52d6310;backdrop-filter:blur(10px)}
+nav{max-width:1120px;height:100%;margin:auto;padding:0 5%;display:flex;align-items:center;justify-content:space-between}
+.brand{font:600 25px 'Playfair Display',serif;letter-spacing:2px;color:var(--pink)}.brand small{display:block;text-align:center;font:8px 'DM Sans',sans-serif;letter-spacing:3px;color:#9e7187;margin-top:1px}
+.navlinks{display:flex;align-items:center;gap:27px;font-size:11px;color:#71435c}.navlinks a{transition:.2s}.navlinks a:hover{color:var(--pink)}
+.book{background:var(--pink);color:white!important;border-radius:24px;padding:11px 21px;box-shadow:0 6px 15px #d52b8330}
+.menu{display:none;border:0;background:none;font-size:25px;color:var(--pink)}
+.hero{overflow:hidden;background:linear-gradient(115deg,#fff0f4 0%,#ffdce8 55%,#f8b9d2 100%);position:relative}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}.hero:before{width:360px;height:360px;background:#fff8fb88;left:-180px;bottom:-210px}.hero:after{width:400px;height:400px;background:#f6a7c766;right:-190px;top:-220px}
+.hero-inner{max-width:1120px;min-height:560px;margin:auto;padding:70px 5%;display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center;position:relative;z-index:1}
+.kicker{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#a74779;font-weight:700}
+h1{font:500 clamp(48px,6vw,76px)/1.02 'Playfair Display',serif;color:#a9256d;margin:20px 0 18px;max-width:540px}
+h1 em{font-weight:500} .intro{font-size:13px;line-height:1.9;color:#79566a;max-width:420px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.btn{display:inline-block;padding:13px 20px;border-radius:24px;font-size:11px;font-weight:600;letter-spacing:.4px;border:1px solid var(--pink);color:var(--pink);background:#fff9}
+.btn.primary{background:var(--pink);color:#fff;box-shadow:0 7px 20px #c52c7833}.btn:hover{transform:translateY(-2px)}
+.stats{display:flex;gap:28px;margin-top:37px}.stat b{font:600 23px 'Playfair Display',serif;color:#b12c72;display:block}.stat span{font-size:9px;color:#895f76}
+.visual{height:435px;position:relative;display:flex;justify-content:center;align-items:center}
+.portrait{width:min(78%,360px);height:430px;object-fit:cover;border-radius:10px 10px 85px 10px;box-shadow:0 22px 55px #9e28512b}
+.floating-note{position:absolute;right:0;top:4px;background:#fff;border-radius:16px;padding:12px 15px;color:#a52c70;font-size:9px;box-shadow:0 8px 24px #a32c5620;letter-spacing:.5px}
+.mini-card{position:absolute;bottom:4px;left:0;width:112px;height:116px;border:6px solid #fff;border-radius:15px;object-fit:cover;box-shadow:0 8px 22px #8c315222}
+.section{padding:78px 5%}.wrap{max-width:1050px;margin:auto}.heading{text-align:center;max-width:620px;margin:0 auto 38px}.heading .kicker{color:var(--pink)}h2{font:500 clamp(34px,4vw,47px) 'Playfair Display',serif;color:#a9256d;margin:12px 0}.heading p{font-size:13px;line-height:1.8;color:var(--muted)}
+.services{background:#fff}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.service{background:#fff7fa;border:1px solid #f6d7e4;padding:27px 24px;border-radius:12px}.service .n{font:italic 25px 'Playfair Display',serif;color:#dc77a6}.service h3{font:23px 'Playfair Display',serif;font-weight:500;color:#8e285e;margin:12px 0 8px}.service p{font-size:12px;line-height:1.8;color:#806274;margin:0}
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}.about img{width:100%;height:410px;object-fit:cover;border-radius:12px}.about p{font-size:13px;line-height:2;color:var(--muted)}.quote{margin-top:22px;padding-left:17px;border-left:2px solid var(--pink);font:italic 19px 'Playfair Display',serif;color:#a52a6d}
+.gallery{background:#fff0f5}.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.gallery-grid img{height:300px;width:100%;object-fit:cover;border-radius:12px}
+.cta{background:linear-gradient(110deg,#b92b73,#e75a9c);color:white;text-align:center}.cta h2{color:white}.cta .heading p{color:#ffe8f1}.cta .kicker{color:#ffe0ed}.cta .btn{border-color:white;color:#a72b6e;background:white}.cta .btn.primary{background:transparent;color:white}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.contact{background:#fff;border:1px solid #f2dce6;border-radius:12px;padding:23px 12px;text-align:center}.contact small{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#bd5d8e}.contact strong{display:block;font:20px 'Playfair Display',serif;color:#8f285e;margin-top:9px}
+footer{background:#54223d;color:#ffeaf2;text-align:center;padding:25px 12px;font-size:10px;letter-spacing:1.4px}.float{position:fixed;bottom:17px;right:17px;background:#d52b83;color:#fff;padding:13px 18px;border-radius:25px;z-index:9;font-size:11px;box-shadow:0 6px 20px #9f205f45}
+@media(max-width:740px){.navlinks{display:none;position:absolute;top:70px;left:0;right:0;background:white;padding:20px 7%;flex-direction:column;align-items:flex-start;gap:20px}.navlinks.show{display:flex}.menu{display:block}.hero-inner{grid-template-columns:1fr;padding-top:48px;gap:25px}.visual{height:360px}.portrait{height:350px;width:min(78%,320px)}.mini-card{width:90px;height:95px}.stats{gap:20px}.grid{grid-template-columns:1fr}.about{grid-template-columns:1fr;gap:28px}.about img{height:320px}.gallery-grid{grid-template-columns:1fr 1fr;gap:9px}.gallery-grid img{height:210px}.gallery-grid img:last-child{display:none}.contact-grid{grid-template-columns:1fr}.section{padding:60px 6%}}
+</style>
+</head>
+<body>
+<div class="top">Lucknow · Studio & Home Service · Bookings Open</div>
+<header><nav>
+<a class="brand" href="#home">PALAK GLAM STUDIO<small>MAKEUP ARTIST</small></a>
+<button class="menu" aria-label="Menu" onclick="document.querySelector('.navlinks').classList.toggle('show')">☰</button>
+<div class="navlinks"><a href="#services">Services</a><a href="#about">Studio</a><a href="#gallery">Gallery</a><a href="https://www.instagram.com/palaks_makeover_/" target="_blank">Instagram</a><a class="book" href="#contact">Book now</a></div>
+</nav></header>
+<main>
+<section class="hero" id="home"><div class="hero-inner">
+<div><div class="kicker">✦ BOOKINGS OPEN · BY APPOINTMENT</div>
+<h1>Soft glam,<br><em>unforgettable</em><br>you.</h1>
+<p class="intro">A beauty experience made around you. From bridal elegance to party-ready glam, discover makeup looks that celebrate your own unique beauty.</p>
+<div class="actions"><a class="btn primary" href="https://www.instagram.com/palaks_makeover_/" target="_blank">Reserve your slot</a><a class="btn" href="#services">Explore services</a></div>
+<div class="stats"><div class="stat"><b>Bridal</b><span>Special occasions</span></div><div class="stat"><b>HD</b><span>Camera-ready looks</span></div><div class="stat"><b>Lucknow</b><span>Studio & home visits</span></div></div>
+</div>
+<div class="visual"><img class="portrait" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=85" alt="Makeup beauty portrait"><div class="floating-note">NOW BOOKING<br><b>2026 · LUCKNOW</b></div><img class="mini-card" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=350&q=85" alt="Makeup products"></div>
+</div></section>
+<section class="section services" id="services"><div class="wrap"><div class="heading"><div class="kicker">THE BEAUTY MENU</div><h2>Makeup for every moment</h2><p>From your big day to a special evening, choose a look that feels just right.</p></div>
+<div class="grid">
+<article class="service"><div class="n">01</div><h3>Bridal Makeup</h3><p>Timeless bridal looks thoughtfully created for your wedding celebrations.</p></article>
+<article class="service"><div class="n">02</div><h3>Party Makeup</h3><p>Fresh, elegant or glam looks for parties, functions and celebrations.</p></article>
+<article class="service"><div class="n">03</div><h3>Engagement</h3><p>Beautifully balanced makeup for engagement and pre-wedding events.</p></article>
+<article class="service"><div class="n">04</div><h3>HD Makeup</h3><p>A refined, camera-ready finish for photos, videos and special occasions.</p></article>
+<article class="service"><div class="n">05</div><h3>Soft Glam</h3><p>Natural-looking glow that enhances your features without hiding you.</p></article>
+<article class="service"><div class="n">06</div><h3>Custom Looks</h3><p>Share your inspiration and let’s create a look that is uniquely yours.</p></article>
+</div></div></section>
+<section class="section" id="about"><div class="wrap about">
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=85" alt="Makeup artist beauty products">
+<div><div class="kicker">MEET YOUR MAKEUP ARTIST</div><h2>Hey, I’m Palak.</h2><p>I’m a makeup artist based in Lucknow, passionate about creating looks that make you feel confident, comfortable and beautiful.</p><p>Whether you’re getting ready for your wedding, a celebration or a special day, I’d love to be part of your moment. Studio and home services are available by appointment.</p><div class="quote">“Your beauty, your style, your moment.”</div></div>
+</div></section>
+<section class="section gallery" id="gallery"><div class="wrap"><div class="heading"><div class="kicker">A LITTLE INSPIRATION</div><h2>The makeup gallery</h2><p>These are sample images for the layout. Add Palak’s real client work here before publishing.</p></div>
+<div class="gallery-grid"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=85" alt="Makeup products"><img src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=700&q=85" alt="Beauty portrait"><img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=700&q=85" alt="Beauty cosmetics"></div>
+</div></section>
+<section class="section cta"><div class="wrap heading"><div class="kicker">LET’S GET YOU READY</div><h2>Have a date in mind?</h2><p>Tell Palak about your occasion, preferred look and date. Get in touch to enquire about availability and pricing.</p><div class="actions" style="justify-content:center"><a class="btn primary" href="https://www.instagram.com/palaks_makeover_/" target="_blank">Message on Instagram</a><a class="btn" href="#contact">Contact details</a></div></div></section>
+<section class="section" id="contact"><div class="wrap"><div class="heading"><div class="kicker">SAY HELLO</div><h2>Let’s create your look</h2><p>For appointments and enquiries, connect with Palak on Instagram.</p></div>
+<div class="contact-grid"><a class="contact" href="https://www.instagram.com/palaks_makeover_/" target="_blank"><small>Instagram</small><strong>@palaks_makeover_</strong></a><div class="contact"><small>Location</small><strong>Lucknow, India</strong></div><div class="contact"><small>Services</small><strong>Studio + Home</strong></div></div></div></section>
+</main>
+<footer>© <span id="year"></span> PALAK GLAM STUDIO · MAKEUP ARTIST · LUCKNOW</footer>
+<a class="float" href="https://www.instagram.com/palaks_makeover_/" target="_blank">Instagram ↗</a>
+<script>document.getElementById('year').textContent=new Date().getFullYear();document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.navlinks').classList.remove('show')));</script>
+</body></html>
