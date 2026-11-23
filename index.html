@@ -38,6 +38,11 @@
     .faq-list{max-width:850px;margin:auto;display:grid;gap:10px}.faq-list details{background:white;border:1px solid var(--line);border-radius:14px;padding:17px 19px}.faq-list summary{cursor:pointer;font-weight:700;color:var(--deep)}.faq-list details p{font-size:13px;color:var(--muted);margin-bottom:0}
     .service-area{background:linear-gradient(120deg,#fff6f3,#f8e5eb);text-align:center}.area-box{max-width:780px;margin:auto;background:#fff;padding:36px;border-radius:22px;border:1px solid var(--line)}.area-box p{color:var(--muted)}.chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px 0}.chip{background:#fff4f6;border:1px solid #efd5df;color:var(--deep);padding:9px 14px;border-radius:30px;font-size:12px;font-weight:600}
     .contact{text-align:center}.contact h2{font-size:42px}.contact p{color:var(--muted)}footer{padding:28px 0;background:#4e2937;color:#fbeef2;text-align:center;font-size:12px}.float-wa{position:fixed;right:18px;bottom:18px;z-index:30;background:#25d366;color:white;border-radius:50px;padding:14px 18px;font-weight:700;box-shadow:0 8px 24px #0003;font-size:13px}
+    .review-form{max-width:680px;margin:24px auto 0;display:grid;gap:12px;text-align:left;background:#fff;padding:22px;border:1px solid var(--line);border-radius:16px}
+    .review-form label{font-size:12px;font-weight:700;color:var(--deep)}
+    .review-form input,.review-form select,.review-form textarea{width:100%;border:1px solid #e8cbd5;border-radius:10px;padding:12px;font:14px "DM Sans",sans-serif;background:#fffdfd;color:var(--ink)}
+    .review-form textarea{min-height:95px;resize:vertical}.review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px;text-align:left}
+    .review-item{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}.review-item .review-stars{color:#c88a43;letter-spacing:2px}.review-item h4{margin:8px 0 4px;color:var(--deep);font-family:"Playfair Display",serif;font-size:18px}.review-item p{margin:0;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.review-date{font-size:10px;color:#9b818a;margin-top:10px}.review-status{font-size:12px;color:var(--muted);min-height:18px}.hp-field{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
     @media(max-width:850px){.navlinks{gap:12px;font-size:12px}.navlinks .optional{display:none}.hero-grid{gap:28px}.hero-photo{height:440px}.gallery{grid-template-columns:repeat(3,1fr)}.ba-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:650px){nav{min-height:66px}.brand{font-size:16px;letter-spacing:.7px}.navlinks{gap:10px}.navlinks a{font-size:11px}.navlinks a:nth-child(2){display:none}nav>.btn{padding:10px 14px;font-size:12px}.hero{padding:48px 0}.hero-grid,.about-grid{grid-template-columns:1fr;gap:28px}.hero-photo{height:390px;max-width:440px;margin:auto;width:100%}section{padding:58px 0}.trustgrid strong{font-size:15px}.trustgrid span{font-size:10px}.services{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr);gap:10px}.photo,.photo img{min-height:220px}.booking-card{padding:22px}.booking-form{grid-template-columns:1fr}.field.full{grid-column:auto}.ba-grid{grid-template-columns:1fr}.ba-side,.ba-side img{height:220px}.insta-grid{grid-template-columns:repeat(2,1fr)}.about-card{padding:27px}.area-box{padding:25px}.contact h2{font-size:34px}}
     @media(max-width:380px){.brand{font-size:14px}.navlinks{gap:7px}.navlinks a{font-size:10px}.hero-photo{height:330px}.photo,.photo img{min-height:190px}}
@@ -105,8 +110,19 @@
     </form><div class="form-foot">Submitting this form opens WhatsApp with your details. Your booking is confirmed only after availability and details are discussed with Palak.</div></div>
   </div></section>
 
-  <section class="review-section" id="reviews"><div class="wrap"><div class="section-head"><div class="eyebrow">Kind Words</div><h2>Client Reviews</h2><p>We would love to hear about your experience at PALAK GLAM STUDIO.</p></div>
-    <div class="review-panel"><div class="stars">★★★★★</div><h3>Your Experience Matters</h3><p>Client feedback will be featured here as genuine reviews are received. If you've booked with Palak, share your experience and help another bride choose with confidence.</p><a class="btn" href="https://wa.me/919026957006?text=Hello%20Palak%2C%20I%20would%20like%20to%20share%20my%20makeup%20experience%20and%20feedback." target="_blank" rel="noopener">Share Your Review</a><div class="review-note">No sample or unverified customer reviews are displayed.</div></div>
+  <section class="review-section" id="reviews"><div class="wrap"><div class="section-head"><div class="eyebrow">Kind Words</div><h2>Client Reviews</h2><p>Had a makeup appointment with us? Share your experience. Reviews appear publicly after approval.</p></div>
+    <div class="review-panel"><div class="stars">★★★★★</div><h3>Your Experience Matters</h3><p>Your feedback helps future clients choose with confidence. Every review is checked before it appears on this website.</p>
+      <form class="review-form" id="reviewForm">
+        <div><label for="reviewName">Your Name *</label><input id="reviewName" maxlength="60" minlength="2" required placeholder="Enter your name"></div>
+        <div><label for="reviewRating">Your Rating *</label><select id="reviewRating" required><option value="">Choose a rating</option><option value="5">★★★★★ — Excellent</option><option value="4">★★★★ — Very good</option><option value="3">★★★ — Good</option><option value="2">★★ — Fair</option><option value="1">★ — Poor</option></select></div>
+        <div><label for="reviewText">Your Review *</label><textarea id="reviewText" minlength="8" maxlength="800" required placeholder="Tell us about your experience (8–800 characters)"></textarea></div>
+        <div class="hp-field" aria-hidden="true"><label for="reviewWebsite">Leave this field empty</label><input id="reviewWebsite" tabindex="-1" autocomplete="off"></div>
+        <button class="btn" type="submit" id="reviewSubmit">Submit Review</button>
+        <div class="review-status" id="reviewStatus" role="status" aria-live="polite"></div>
+      </form>
+      <div class="review-note">Reviews are published only after manual approval. Please submit genuine feedback from a completed appointment.</div>
+    </div>
+    <div class="review-list" id="approvedReviews" aria-live="polite"></div>
   </div></section>
 
   <section class="insta" id="instagram"><div class="wrap"><div class="section-head"><div class="eyebrow">Follow the Latest Looks</div><h2>Find Us on Instagram</h2><p>Explore the portfolio and follow <strong>@palaks_makeover_</strong> for new looks and updates.</p></div>
@@ -137,7 +153,9 @@
 </main>
 <footer>© 2026 PALAK GLAM STUDIO · Lucknow, Uttar Pradesh · All rights reserved</footer>
 <a class="float-wa" href="https://wa.me/919026957006?text=Hello%20Palak%2C%20I%20want%20to%20enquire%20about%20makeup%20booking." aria-label="Chat on WhatsApp">WhatsApp Booking</a>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  // Booking enquiry continues to open WhatsApp.
   document.getElementById('bookingForm').addEventListener('submit', function(e){
     e.preventDefault();
     const name = document.getElementById('clientName').value.trim();
@@ -148,5 +166,44 @@
     const message = `Hello Palak, I want to enquire about a makeup booking.%0A%0AName: ${encodeURIComponent(name)}%0AEvent date: ${encodeURIComponent(date)}%0AService: ${encodeURIComponent(service)}%0ALocation: ${encodeURIComponent(location)}%0AAdditional details: ${encodeURIComponent(extra || 'Not provided')}`;
     window.open('https://wa.me/919026957006?text=' + message, '_blank');
   });
+
+  const SUPABASE_URL = 'https://qbhjfmlermgyorsonjvb.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_HrceTmg5k3IOpH4dlY3P6w_cu-HU8n5';
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  const reviewList = document.getElementById('approvedReviews');
+  const reviewStatus = document.getElementById('reviewStatus');
+  const escapeText = (value) => String(value ?? '');
+
+  async function loadApprovedReviews(){
+    reviewList.replaceChildren();
+    const { data, error } = await db.from('customer_reviews')
+      .select('id, customer_name, rating, review, created_at')
+      .eq('status', 'approved').order('created_at', {ascending:false}).limit(30);
+    if(error){ reviewList.textContent = 'Reviews are temporarily unavailable. Please try again later.'; return; }
+    if(!data || data.length === 0){ reviewList.textContent = 'No approved reviews yet. Be the first to share your experience.'; return; }
+    data.forEach(item => {
+      const card = document.createElement('article'); card.className = 'review-item';
+      const stars = document.createElement('div'); stars.className = 'review-stars'; stars.textContent = '★'.repeat(Number(item.rating)) + '☆'.repeat(5-Number(item.rating));
+      const name = document.createElement('h4'); name.textContent = escapeText(item.customer_name);
+      const body = document.createElement('p'); body.textContent = escapeText(item.review);
+      const date = document.createElement('div'); date.className = 'review-date'; date.textContent = new Date(item.created_at).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'});
+      card.append(stars,name,body,date); reviewList.append(card);
+    });
+  }
+
+  document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('reviewName').value.trim();
+    const rating = Number(document.getElementById('reviewRating').value);
+    const review = document.getElementById('reviewText').value.trim();
+    if(document.getElementById('reviewWebsite').value) return;
+    const submit = document.getElementById('reviewSubmit'); submit.disabled = true; submit.textContent = 'Submitting…';
+    reviewStatus.textContent = '';
+    const { error } = await db.from('customer_reviews').insert({customer_name:name, rating, review, status:'pending'});
+    if(error){ reviewStatus.textContent = 'Review could not be submitted. Please try again.'; }
+    else { e.target.reset(); reviewStatus.textContent = 'Thank you! Your review has been received and will appear after approval.'; }
+    submit.disabled = false; submit.textContent = 'Submit Review';
+  });
+  loadApprovedReviews();
 </script>
 </body></html>
