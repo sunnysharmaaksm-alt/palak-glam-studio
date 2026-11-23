@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,7 @@ p{line-height:1.65;color:var(--muted)}
 .btn.secondary{background:#f7e7ec;color:var(--deep)}
 .btn.danger{background:#fff0f0;color:#9a3540}
 .btn:disabled{opacity:.6;cursor:wait}
-.status{font-size:13px;color:var(--muted);min-height:20px}
+.status{font-size:13px;color:var(--muted);min-height:20px;overflow-wrap:anywhere}
 .review{border:1px solid var(--line);border-radius:15px;padding:18px;margin:12px 0;background:#fffdfd}
 .review h3{font-size:20px;margin:6px 0}
 .stars{color:#c88a43;letter-spacing:2px}
@@ -70,7 +71,7 @@ a{color:var(--pink)}
 <div class="panel">
 <h2>Published Reviews</h2>
 <p>These reviews are currently visible on your public website. You can permanently delete a review here.</p>
-<div class="status" id="publishedStatus"></div>
+<div class="status" id="publishedStatus" role="status"></div>
 <div id="publishedList"></div>
 </div>
 </section>
@@ -96,10 +97,17 @@ const pendingList=document.getElementById('pendingList');
 const publishedList=document.getElementById('publishedList');
 const publishedStatus=document.getElementById('publishedStatus');
 
+let activeUserId=null;
+let pendingRequest=0;
+let publishedRequest=0;
+
 function showLogin(message=''){
 loginPanel.classList.remove('hidden');
 dashboard.classList.add('hidden');
 loginStatus.textContent=message;
+pendingList.replaceChildren();
+publishedList.replaceChildren();
+activeUserId=null;
 }
 
 function showDashboard(){
@@ -108,27 +116,25 @@ dashboard.classList.remove('hidden');
 document.getElementById('adminEmail').textContent=ADMIN_EMAIL;
 }
 
-async function checkSession(){
-const {data:{session},error}=await db.auth.getSession();
-
-if(error){
-showLogin('Could not check login. Please refresh.');
-return;
-}
-
+async function handleSession(session){
 if(!session){
+if(activeUserId!==null || dashboard.classList.contains('hidden')){
 showLogin();
+}
 return;
 }
 
 const email=(session.user?.email||'').toLowerCase();
 
 if(email!==ADMIN_EMAIL){
-await db.auth.signOut();
 showLogin('This account is not authorised. Use '+ADMIN_EMAIL+'.');
+await db.auth.signOut();
 return;
 }
 
+if(activeUserId===session.user.id)return;
+
+activeUserId=session.user.id;
 showDashboard();
 loadPending();
 loadPublished();
@@ -145,7 +151,7 @@ queryParams:{prompt:'select_account'}
 }
 });
 
-if(error)loginStatus.textContent='Google sign-in could not start. Check Supabase settings.';
+if(error)loginStatus.textContent='Sign-in error: '+error.message;
 });
 
 document.getElementById('logoutBtn').addEventListener('click',async()=>{
@@ -159,24 +165,30 @@ loadPublished();
 });
 
 async function loadPending(){
+const request=++pendingRequest;
 adminStatus.textContent='Loading pending reviews…';
-pendingList.replaceChildren();
 
 const {data,error}=await db.from('customer_reviews')
 .select('id,customer_name,rating,review,created_at')
 .eq('status','pending')
 .order('created_at',{ascending:false});
 
+if(request!==pendingRequest)return;
+
 if(error){
-adminStatus.textContent='Could not load pending reviews. Check database permissions.';
+adminStatus.textContent='Load error: '+error.message;
 return;
 }
 
-adminStatus.textContent=data.length
-?data.length+' review(s) waiting for approval.'
+pendingList.replaceChildren();
+
+const uniqueReviews=[...new Map((data||[]).map(item=>[item.id,item])).values()];
+
+adminStatus.textContent=uniqueReviews.length
+?uniqueReviews.length+' review(s) waiting for approval.'
 :'No pending reviews right now.';
 
-data.forEach(item=>{
+uniqueReviews.forEach(item=>{
 const card=createReviewCard(item);
 const actions=document.createElement('div');
 actions.className='actions';
@@ -198,24 +210,30 @@ pendingList.append(card);
 }
 
 async function loadPublished(){
+const request=++publishedRequest;
 publishedStatus.textContent='Loading published reviews…';
-publishedList.replaceChildren();
 
 const {data,error}=await db.from('customer_reviews')
 .select('id,customer_name,rating,review,created_at')
 .eq('status','approved')
 .order('created_at',{ascending:false});
 
+if(request!==publishedRequest)return;
+
 if(error){
-publishedStatus.textContent='Could not load published reviews. Check admin SELECT permissions.';
+publishedStatus.textContent='Load error: '+error.message;
 return;
 }
 
-publishedStatus.textContent=data.length
-?data.length+' published review(s).'
+publishedList.replaceChildren();
+
+const uniqueReviews=[...new Map((data||[]).map(item=>[item.id,item])).values()];
+
+publishedStatus.textContent=uniqueReviews.length
+?uniqueReviews.length+' published review(s).'
 :'No published reviews yet.';
 
-data.forEach(item=>{
+uniqueReviews.forEach(item=>{
 const card=createReviewCard(item);
 const actions=document.createElement('div');
 actions.className='actions';
@@ -237,17 +255,20 @@ card.className='review';
 
 const stars=document.createElement('div');
 stars.className='stars';
-stars.textContent='★'.repeat(Number(item.rating))+'☆'.repeat(5-Number(item.rating));
+const rating=Math.max(0,Math.min(5,Number(item.rating)||0));
+stars.textContent='★'.repeat(rating)+'☆'.repeat(5-rating);
 
 const name=document.createElement('h3');
-name.textContent=item.customer_name;
+name.textContent=item.customer_name||'Customer';
 
 const body=document.createElement('p');
-body.textContent=item.review;
+body.textContent=item.review||'';
 
 const meta=document.createElement('div');
 meta.className='meta';
-meta.textContent=new Date(item.created_at).toLocaleString('en-IN');
+meta.textContent=item.created_at
+?new Date(item.created_at).toLocaleString('en-IN')
+:'';
 
 card.append(stars,name,body,meta);
 return card;
@@ -262,7 +283,7 @@ const {error}=await db.from('customer_reviews')
 .eq('id',id);
 
 if(error){
-adminStatus.textContent='Update failed. Check your admin permissions.';
+adminStatus.textContent='Update error: '+error.message;
 button.disabled=false;
 button.textContent=status==='approved'?'Approve':'Reject';
 return;
@@ -272,8 +293,7 @@ adminStatus.textContent=status==='approved'
 ?'Review approved and published.'
 :'Review rejected.';
 
-loadPending();
-loadPublished();
+await Promise.all([loadPending(),loadPublished()]);
 }
 
 async function deleteReview(id,button){
@@ -286,27 +306,34 @@ if(!confirmed)return;
 button.disabled=true;
 button.textContent='Deleting…';
 
-const {error}=await db.from('customer_reviews')
+const {data,error}=await db.from('customer_reviews')
 .delete()
-.eq('id',id);
+.eq('id',id)
+.select('id');
 
 if(error){
-publishedStatus.textContent='Delete failed. Check your admin DELETE policy.';
+publishedStatus.textContent='Delete error ('+(error.code||'')+'): '+error.message;
+button.disabled=false;
+button.textContent='Delete Review';
+return;
+}
+
+if(!data || data.length===0){
+publishedStatus.textContent='No review was deleted. Check your admin DELETE and SELECT policies.';
 button.disabled=false;
 button.textContent='Delete Review';
 return;
 }
 
 publishedStatus.textContent='Review permanently deleted.';
-loadPublished();
+await loadPublished();
 }
 
+// Supabase INITIAL_SESSION event handles the initial login state.
+// No separate checkSession() call is needed.
 db.auth.onAuthStateChange((_event,session)=>{
-if(!session)showLogin();
-else checkSession();
+handleSession(session);
 });
-
-checkSession();
 </script>
 </body>
 </html>
